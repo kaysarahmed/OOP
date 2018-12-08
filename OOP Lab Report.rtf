@@ -1,0 +1,1091 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.17134}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9\par
+SAMPLE CODE:\par
+#include<bits/stdc++.h>\par
+#include<string>\par
+#include<fstream>\par
+using namespace std;\par
+class Mess    \{\par
+public:\par
+    string name;\par
+    Mess() \{\};\par
+    Mess(string a)  \{\par
+        name = a;  \}\par
+    friend view_Print();     \};\par
+class Date     \{\par
+public:\par
+    string date;\par
+    Date() \{\};\par
+    Date(string s)     \{\par
+        date=s;  \};\par
+    friend view_Print();      \};\par
+class Person   \{\par
+public:\par
+    string name;\par
+    Date date;\par
+    Person() \{\};\par
+    Person(string n,Date *date)  \{\par
+        name=n;\par
+        this->date=*date;\par
+        \};\par
+    friend view_Print();    \};\par
+class Owner : public Person\par
+\{\par
+public:\par
+    Mess mess;\par
+    string date;\par
+    Owner() \{\};\par
+    Owner(string name, string date)  \{\par
+        this->name = name;\par
+        this->date = date;\par
+         \}\par
+    friend view_Print();    \};\par
+class Member : public Person    \{\par
+public:\par
+    Mess mess;\par
+    string date;\par
+    double deposit;\par
+    Member() \{\};\par
+    Member(string name, string date,double deposit)  \{\par
+        this->name = name;\par
+        this->date = date;\par
+        this->deposit = deposit;  \}\par
+    friend view_Print();    \};\par
+double Meal_Rate(double totalmeal,double Cost)   \{\par
+    double meal_rate=Cost/totalmeal;\par
+    return meal_rate;  \};\par
+double Balance(int tmeal,double mealrate,double deposit)  \{\par
+    double myMeal;\par
+    myMeal=mealrate*tmeal;\par
+    double blnc;\par
+    blnc=deposit-myMeal;\par
+    return blnc; \}\par
+view_Print(Mess m,Owner o,Member *x[],int y[],int z[],int p[],int q[],double s,double k[], double w,int e,int f,int g,int h,Date *d1[])  \{\par
+    cout << "\\nMess Name         : " << m.name << endl;\par
+    cout << "Mess Owner's Name : " << o.name << endl;\par
+    cout << "Date of Birth     : " << o.date << endl;\par
+    cout << "-----------------------------------------------------" << endl;\par
+    cout << "-----------------------------------------------------" << endl;\par
+    cout << endl << endl;\par
+    for(int i=0; i<2; i++) \{\par
+        cout << "Member "<< " " << i+1 << " : " << endl;\par
+        cout << "NAME          : " << x[i]->name << endl;\par
+        cout << "DATE OF BIRTH : " << x[i]->date<< endl;\par
+        cout << "---------------------------------------" << endl;\par
+        cout << "Deposit            : " << x[i]->deposit<< endl;\par
+        cout << "Total Morning Meal : " << y[i] <<endl;\par
+        cout << "Total Noon Meal    : " << z[i] <<endl;\par
+        cout << "Total Night Meal   : " << p[i] <<endl;\par
+        cout << "Total Meal         : " << q[i] << endl;\par
+        double a = Balance(q[i],s,x[i]->deposit);\par
+        cout << "Balance            : " << a << endl;\par
+        cout << endl << endl;  \}\par
+    cout << "_________MEAL INFORMATION_________" << endl << endl << endl;\par
+    double TotalDeposit = x[0]->deposit + x[1]->deposit;\par
+    cout << "Total Deposit         : " << TotalDeposit << endl;\par
+    cout <<  endl << endl << "Daily Shopping Costs--> " << endl ;\par
+    for(int i = 0; i<4; i++) \{\par
+        cout << "Day " << i+1 << "-"<<d1[i]->date << "      : " << k[i] << endl; \}\par
+    cout << endl << endl << "Total Cost            : " << w << endl;\par
+    cout << "Meal Rate             : " << s << endl;\par
+    cout << "Total Morning Meal    : " << e << endl;\par
+    cout << "Total Noon Meal       : " << f << endl;\par
+    cout << "Total Night Meal      : " << g << endl;\par
+    cout << "Total Meal            : " << h << endl;\par
+    double c = Balance(h,s,TotalDeposit);\par
+    cout << "Total Balance         : " << c << endl; \}\par
+int main()  \{\par
+    Mess mess("WHITE HOUSE");\par
+    Owner owner("Shanto","09/11/1998");\par
+    Member *member[2]=     \{\par
+        new Member("Rakib Mia","01/2/1998",2000),\par
+        new Member("Shakib Mia","2/12/1999",1900), \};\par
+    Date *date[4]=   \{\par
+        new Date("09/10/2018"),\par
+        new Date("10/10/2018"),\par
+        new Date("11/10/2018"),\par
+        new Date("12/10/2019"),   \};\par
+    int day[4][2][3] = \{\{\{0,1,1\},\{1,1,0\}\},\{\{1,1,1\},\{0,1,1\}\},\{\{1,1,1\},\{0,1,0\}\},\{\{1,0,1\},\{1,1,0\}\}\};\par
+    int TotalMeal = 0, TotalMorningMeal = 0, TotalNoonMeal = 0, TotalNightMeal = 0;\par
+    for(int p = 0; p<4; p++) ///ToTal Mea;  \{\par
+        for(int q = 0; q<2; q++)\par
+        \{\par
+            for(int r = 0; r<3; r++) \{\par
+                TotalMeal += day[p][q][r];   \}  \}\par
+    for(int p = 0; p<4; p++)\{ ///ToTal Morning Meal;\par
+        for(int q = 0; q<2; q++)  \{\par
+            for(int r = 0; r<1; r++)  \{\par
+                TotalMorningMeal += day[p][q][r];   \} \} \}\par
+    for(int p = 0; p<4; p++) ///ToTal Noon Meal  \{\par
+        for(int q = 0; q<2; q++)   \{\par
+            for(int r = 1; r<2; r++)  \{\par
+                TotalNoonMeal += day[p][q][r];  \} \}\par
+    for(int p = 0; p<4; p++) ///ToTal Night Meal    \{\par
+        for(int q = 0; q<2; q++)  \{\par
+            for(int r = 2; r<3; r++)  \{\par
+                TotalNightMeal += day[p][q][r];   \}    \}\par
+    int Morning1 = 0,Morning2 = 0, Noon1 = 0,Noon2 = 0,Night1 = 0, Night2 = 0;\par
+    int  TotalMember1Meal = 0, TotalMember2Meal= 0;\par
+    for(int p = 0; p<4; p++) ///ToTal MEMBER 1 Morning Meal   \{\par
+        for(int q = 0; q<1; q++)     \{\par
+            for(int r = 0; r<1; r++)       \{\par
+                Morning1 += day[p][q][r];       \}        \}\par
+    for(int p = 0; p<4; p++) ///ToTal MEMBER 2 Morning Meal    \{\par
+        for(int q = 1; q<2; q++)       \{\par
+            for(int r = 0; r<1; r++)           \{\par
+                Morning2 += day[p][q][r];           \}        \}\par
+    int Morning[2] = \{Morning1,Morning2\};\par
+    for(int p = 0; p<4; p++) ///ToTal MEMBER 1 Noon Meal    \{\par
+        for(int q = 0; q<1; q++)        \{\par
+            for(int r = 1; r<2; r++)           \{\par
+                Noon1 += day[p][q][r];         \}        \}\par
+    for(int p = 0; p<4; p++) ///ToTal MEMBER 2 Noon Meal    \{\par
+        for(int q = 1; q<2; q++)        \{\par
+            for(int r = 1; r<2; r++)         \{\par
+                Noon2 += day[p][q][r];          \}       \}\par
+    int Noon[2] = \{Noon1,Noon2\};\par
+    for(int p = 0; p<4; p++) ///ToTal MEMBER 1 Night Meal    \{\par
+        for(int q = 0; q<1; q++)        \{\par
+            for(int r = 2; r<3; r++)\par
+            \{\par
+                Night1 += day[p][q][r];         \}        \}\par
+    for(int p = 0; p<4; p++) ///ToTal MEMBER 2 Night Meal    \{\par
+        for(int q = 1; q<2; q++)        \{\par
+            for(int r = 2; r<3; r++)         \{\par
+                Night2 += day[p][q][r];          \}        \}\par
+    int Night[2] = \{Night1,Night2\};\par
+    for(int p = 0; p<4; p++) ///ToTal MEMBER 1 Meal    \{\par
+        for(int q = 0; q<1; q++)        \{\par
+            for(int r = 0; r<3; r++)            \{\par
+                TotalMember1Meal += day[p][q][r];            \}        \}\par
+    for(int p = 0; p<4; p++) ///ToTal MEMBER 2 Meal    \{\par
+        for(int q = 1; q<2; q++)        \{\par
+            for(int r = 0; r<3; r++)          \{\par
+       TotalMember2Meal += day[p][q][r];         \}        \}\par
+    int TotalMemberMeal[2] = \{TotalMember1Meal,TotalMember2Meal\};\par
+    double Cost[4] = \{210.50,105.75,225.50,90.75\};      ///Total Shopping\par
+    double TotalCost = 0.0;\par
+    for(int i = 0; i<4; i++)\par
+        TotalCost += Cost[i];\par
+  double mealrate=Meal_Rate(TotalMeal,TotalCost); view_Print(mess,owner,member,Morning,Noon,Night,TotalMemberMeal,mealrate,Cost,TotalCost,TotalMorningMeal,TotalNoonMeal,TotalNightMeal,TotalMeal,date);\par
+    FILE *fp;\par
+    char *filename;\par
+    filename="mealinfo.csv";\par
+    fp=fopen(filename,"w+");\par
+    fprintf(fp,"Member,Day No.,Date,Morning,Noon,Night,Total_Meal");\par
+    fprintf(fp,"\\n\\ntipu");\par
+    int sum=0;\par
+    for(int i=0; i<4; i++)         \{\par
+        sum=0;\par
+        fprintf(fp,",Day %d.,%d/12/18,",i+1,i+1);\par
+        for(int k=0; k<1; k++)     \{\par
+            for(int j=0; j<3; j++)      \{\par
+                fprintf(fp,"%d,",day[i][0][j]);\par
+                sum+=day[i][0][j];           \}\par
+            fprintf(fp,"%d\\n",sum);        \}    \}\par
+    fprintf(fp,",TOTAL,,%d,%d,%d,%d\\n",Morning1,Noon1,Night1,TotalMember1Meal);\par
+    fprintf(fp,"\\n,Meal Rate,%lf,,Deposit,%lf,,Cost,%lf,,Balance,%lf\\n\\n\\n",mealrate,2000.00,(mealrate*TotalMember1Meal),2000.00-(mealrate*TotalMember1Meal));\par
+    fprintf(fp,"Member,Day No.,Date,Morning,Noon,Night,Total_Meal\\n");\par
+    fprintf(fp,"\\nRobin");\par
+    int sum2=0;\par
+    for(int i=0; i<4; i++)            \{\par
+        sum2=0;\par
+        fprintf(fp,",Day %d.,%d/12/17,",i+1,i+1);\par
+        for(int k=1; k<2; k++)      \{\par
+            for(int j=0; j<3; j++)         \{\par
+                fprintf(fp,"%d,",day[i][1][j]);\par
+                sum2+=day[i][1][j];        \}\par
+            fprintf(fp,"%d\\n",sum2);      \}    \}\par
+    fprintf(fp,",TOTAL,,%d,%d,%d,%d\\n",Morning1,Noon1,Night1,TotalMember1Meal);\par
+    fprintf(fp,"\\n,Meal Rate,%lf,,Deposit,%lf,,Cost,%lf,,Balance,%lf\\n",mealrate,1500.00,(mealrate*TotalMember2Meal),1500.00-(mealrate*TotalMember2Meal));\par
+    return 0;  \}\par
+SAMPLE OUTPUT:\par
+\par
+Mess Name         : WHITE HOUSE\par
+Mess Owner's Name : Shanto\par
+Date of Birth     : 09/11/1998\par
+-----------------------------------------------------\par
+-----------------------------------------------------\par
+\par
+\par
+Member  1 :\par
+NAME          : Rakib Mia\par
+DATE OF BIRTH : 01/2/1998\par
+---------------------------------------\par
+Deposit            : 2000\par
+Total Morning Meal : 3\par
+Total Noon Meal    : 3\par
+Total Night Meal   : 4\par
+Total Meal         : 10\par
+Balance            : 1627.94\par
+\par
+\par
+Member  2 :\par
+NAME          : Shakib Mia\par
+DATE OF BIRTH : 2/12/1999\par
+---------------------------------------\par
+Deposit            : 1900\par
+Total Morning Meal : 2\par
+Total Noon Meal    : 4\par
+Total Night Meal   : 1\par
+Total Meal         : 7\par
+Balance            : 1639.56\par
+\par
+\par
+_________MEAL INFORMATION_________\par
+\par
+\par
+Total Deposit         : 3900\par
+\par
+\par
+Daily Shopping Costs-->\par
+Day 1-09/10/2018      : 210.5\par
+Day 2-10/10/2018      : 105.75\par
+Day 3-11/10/2018      : 225.5\par
+Day 4-12/10/2019      : 90.75\par
+\par
+\par
+Total Cost            : 632.5\par
+Meal Rate             : 37.2059\par
+Total Morning Meal    : 5\par
+Total Noon Meal       : 7\par
+Total Night Meal      : 5\par
+Total Meal            : 17\par
+Total Balance         : 3267.5\par
+\par
+Process returned 0 (0x0)   execution time : 0.290 s\par
+Press any key to continue.\par
+\par
+SAMPLE INPUT:\par
+#include<bits/stdc++.h>\par
+#include<string.h>\par
+#include<ctime>\par
+#include<fstream>\par
+using namespace std;\par
+\par
+class Date\par
+\{\par
+    public:\par
+    string date;\par
+    Date()\{\};\par
+    Date(string date)\par
+    \{\par
+        this->date=date;\par
+    \}\par
+\};\par
+class Person\par
+\{\par
+public:\par
+    string name;\par
+    Date date;\par
+    Person()\{\};\par
+\par
+    Person(string name)\par
+    \{\par
+       this->name=name;\par
+    \}\par
+    Person(string name,string date)\par
+    \{\par
+        this->name=name;\par
+        this->date.date=date;\par
+    \};\par
+\par
+\};\par
+\par
+class Department\par
+\{\par
+public:\par
+    string dpt_name;\par
+    Department()\{\};\par
+    Department(string name)\par
+    \{\par
+        dpt_name=name;\par
+    \}\par
+\};\par
+\par
+\par
+class Student : public Person\par
+\{\par
+  public:\par
+      string id;\par
+      Department department;\par
+      Student()\{\};\par
+      Student(string name,string date,Department dpt_name,string id_no) : Person(name,date)\par
+      \{\par
+        id=id_no;\par
+        department=dpt_name;\par
+      \}\par
+      view_student_info()\par
+      \{\par
+          cout<<"Student name: "<<name<<endl;\par
+          cout<<"Department: "<<department.dpt_name<<endl;\par
+          cout<<"Student ID: "<<id<<endl;\par
+          cout<<"Students Birthday: "<<this->date.date<<endl;\par
+      \}\par
+      friend orderfood();\par
+      friend blacklist();\par
+\};\par
+\par
+\par
+class Sellsman : public Person\par
+\{\par
+public:\par
+    int seller_no;\par
+    Sellsman()\{\};\par
+    Sellsman(string name,string date,int seller_no): Person(name,date)\par
+    \{\par
+      this->seller_no=seller_no;\par
+    \};\par
+    view_sellsman()\par
+    \{\par
+        cout<<"Sells person Name: "<<name<<endl;\par
+        cout<<"Birthday: "<<this->date.date<<endl;\par
+    \}\par
+    friend orderfood();\par
+\par
+\};\par
+\par
+class Login\par
+\{\par
+    string user_name;\par
+    string password;\par
+public:\par
+    Login()\{\};\par
+    Login(string user_name,string password)\par
+    \{\par
+       this->user_name=user_name;\par
+        this->password=password;\par
+    \}\par
+    friend blacklist();\par
+\};\par
+\par
+class Faculty : public Person\par
+\{\par
+public:\par
+    string designation;\par
+    Department department;\par
+    Login login;\par
+    Faculty()\{\};\par
+    Faculty(string designation,string name,Department department1,Login *login2):Person(name)\par
+    \{\par
+      this->designation=designation;\par
+      department=department1;\par
+      login=*login2;\par
+    \}\par
+    view_faculty()\par
+    \{\par
+        cout<<"Name: "<<name<<endl;\par
+        cout<<"Department: "<<department.dpt_name<<endl;\par
+        cout<<"Designation: "<<designation<<endl;\par
+    \}\par
+    Blacklist(int order_data[],string deliver_data[],Student *student[],string blacklist[])\par
+    \{\par
+        cout<<"Blacklisted names are: \\n";\par
+        for(int n=0;n<4;n++)\par
+        \{\par
+            if(order_data[n]==1)\par
+           if(deliver_data[n]=="Didn't")\par
+           \{\par
+             blacklist[n]=student[n]->name;\par
+             cout<<"Name: "<<student[n]->name<<"\\nID: "<<student[n]->id<<"\\nYou have been blacklisted, Contact with Department"<<endl;\par
+           \}\par
+        \}\par
+    \};\par
+\};\par
+\par
+\par
+    int view_system_time()\par
+    \{\par
+    time_t k = time(0);\par
+    struct tm *t = localtime(&k);\par
+    cout<< t->tm_hour << ":" << t->tm_min << endl;\par
+    return t->tm_hour;\par
+    \}\par
+\par
+int orderfood(Student *student)\par
+\{\par
+    int tm=view_system_time();\par
+    if(tm>22)\par
+    \{\par
+        cout<<"Sorry, You cannot Place the pre-order.\\n";\par
+        return -1;\par
+    \}\par
+    else\par
+    \{\par
+        cout<<"Name: "<<student->name<<"\\nID: "<<student->id<<"\\n Your Order Has been placed.\\n";\par
+        return 1;\par
+    \}\par
+\}\par
+\par
+\par
+int main()\par
+\{\par
+    int number_of_students=4;\par
+    int temp=number_of_students;\par
+    Department department("CSE");\par
+    Student *students[number_of_students]=\par
+    \{\par
+        new Student("Pulak","20-6-1996",department,"1001"),\par
+        new Student("Evan","13-3-1998",department,"1002"),\par
+        new Student("Ayon","21-11-1996",department,"1003"),\par
+        new Student("Uzzal","05-07-1997",department,"1004")\par
+    \};\par
+\par
+    Sellsman sells_person("Saiful Islam","13-03-1985",1);\par
+    sells_person.view_sellsman();\par
+    Login *login_data[2]=\{\par
+                 new Login("RAB","111"),\par
+                 new Login("KAL","222")\par
+                 \};\par
+    Faculty *faculty_member[2]=\par
+    \{\par
+        new Faculty("Professor","Ashik Ahmed",department,login_data[0]),\par
+        new Faculty("Lecturer","Rabiul Islam",department,login_data[1])\par
+    \};\par
+    for(int i=0;i<3;i++)\par
+        students[i]->view_student_info();\par
+\par
+    for(int i=0;i<2;i++)\par
+    faculty_member[i]->view_faculty();\par
+\par
+    int order_data[number_of_students],g=0;\par
+    for(int i=0;i<number_of_students;i++)\par
+    \{\par
+\par
+        g=orderfood(students[i]);\par
+        order_data[i]=g;\par
+\par
+    \}\par
+    string delivery_info[number_of_students]=\{"ordered","Didn't","ordered","Didn't"\};\par
+     string blacklisted_members[number_of_students];\par
+     faculty_member[0]->Blacklist(order_data,delivery_info,students,blacklisted_members);\par
+\par
+     ofstream students_file;\par
+     students_file.open("Students.csv");\par
+     students_file<<"Students are: \\n";\par
+     students_file<<"Roll,Name,Department\\n";\par
+     for(int i=0;i<number_of_students;i++)\par
+     \{\par
+        students_file<<students[i]->id<<","<<students[i]->name<<","<<students[i]->department.dpt_name<<endl;\par
+     \}\par
+\par
+\par
+\par
+     ofstream blacklist_file;                    ///Blacklist part\par
+     blacklist_file.open("Blacklist.csv");\par
+\par
+     int counter=1;\par
+      blacklist_file<<"Blacklisted names are:\\n";\par
+      blacklist_file<<"Roll,Name,Department\\n";\par
+      string blacklisted_id[number_of_students];\par
+     for(int i=0;i<number_of_students;i++)\par
+     \{\par
+         if(blacklisted_members[i]!="\\0")\par
+         \{\par
+          blacklist_file<<students[i]->id<<","<<blacklisted_members[i]<<","<<students[i]->department.dpt_name<<endl;\par
+             counter++;\par
+             blacklisted_id[i]=students[i]->id;\par
+\par
+         \}\par
+     \}\par
+     blacklist_file.close();\par
+    cout<<"Blacklisted person included in file.\\n";\par
+    cout<<"New to order service?\\nPress 1 to register or 0 to exit\\n"<<endl;\par
+    int new_order;\par
+    cin>>new_order;\par
+    while(new_order!=0)\par
+    \{\par
+        string name,department_name,birthday,roll;\par
+        cout<<"Enter Name: ";\par
+        cin>>name;\par
+        cout<<"\\nEnter ID:";\par
+        cin>>roll;\par
+        cout<<"\\nEnter Department: ";\par
+        cin>>department_name;\par
+        cout<<"\\nEnter birthday:";\par
+        cin>>birthday;\par
+\par
+        students[number_of_students]=\{new Student(name,birthday,department_name,roll)\};\par
+        number_of_students+=1;\par
+        int order_data1;\par
+       order_data1=orderfood(students[number_of_students-1]);\par
+       cout<<"New to order service?\\nPress 1 to register or 0 to exit"<<endl;\par
+       cin>>new_order;\par
+       if(new_order!=1)\par
+        break;\par
+    \}\par
+   string delivery_data2[number_of_students]=\{"ordered","Didn't","ordered","Didn't","ordered"\};\par
+\par
+    for(int i=temp;i<number_of_students;i++)\par
+    \{\par
+        students_file<<students[i]->id<<","<<students[i]->name<<","<<students[i]->department.dpt_name<<endl;\par
+    \}\par
+    for(int i=0;i<number_of_students;i++)\par
+    \{\par
+        if(blacklisted_id[i]!="\\0" && students[i]->id==blacklisted_id[i] )\par
+            cout<<students[i]->name<<"\\nYou cannot order,You have been blacklisted.\\nContact with Department"<<endl;\par
+        else\par
+            orderfood(students[i]);\par
+    \}\par
+\par
+\}\par
+\par
+SAMPLE OUTPUT:\par
+Sells person Name: Saiful Islam\par
+Birthday: 13-03-1985\par
+Student name: Pulak\par
+Department: CSE\par
+Student ID: 1001\par
+Students Birthday: 20-6-1996\par
+Student name: Evan\par
+Department: CSE\par
+Student ID: 1002\par
+Students Birthday: 13-3-1998\par
+Student name: Ayon\par
+Department: CSE\par
+Student ID: 1003\par
+Students Birthday: 21-11-1996\par
+Name: Ashik Ahmed\par
+Department: CSE\par
+Designation: Professor\par
+Name: Rabiul Islam\par
+Department: CSE\par
+Designation: Lecturer\par
+22:4\par
+Name: Pulak\par
+ID: 1001\par
+ Your Order Has been placed.\par
+22:4\par
+Name: Evan\par
+ID: 1002\par
+ Your Order Has been placed.\par
+22:4\par
+Name: Ayon\par
+ID: 1003\par
+ Your Order Has been placed.\par
+22:4\par
+Name: Uzzal\par
+ID: 1004\par
+ Your Order Has been placed.\par
+Blacklisted names are:\par
+Name: Evan\par
+ID: 1002\par
+You have been blacklisted, Contact with Department\par
+Name: Uzzal\par
+ID: 1004\par
+You have been blacklisted, Contact with Department\par
+Blacklisted person included in file.\par
+New to order service?\par
+Press 1 to register or 0 to exit\par
+\par
+SAMPLE INPUT:\par
+#include<bits/stdc++.h>\par
+using namespace std;\par
+float arr[9];\par
+int i,cnt=0;\par
+\par
+class Person\par
+\{\par
+    protected:\par
+    string name;\par
+public:\par
+    Person() \{ \}\par
+    Person(string name)\par
+    \{\par
+        this->name=name;\par
+    \}\par
+    string acces_person()\par
+    \{\par
+        return name;\par
+    \}\par
+\};\par
+\par
+class Contestant\par
+\{\par
+    protected:\par
+    int ACM_solve;\par
+\};\par
+\par
+class Student : public Contestant,public Person\par
+\{\par
+protected:\par
+    float GPA;\par
+   // string name;\par
+public:\par
+    Student() \{ \}\par
+    Student(string Name,float GPA,int ACM_solve):Person(Name)\par
+    \{\par
+        this->GPA=GPA;\par
+        this->ACM_solve=ACM_solve;\par
+        //name=N;\par
+    \}\par
+    int checkgpa(float ab)\par
+    \{\par
+        if(GPA==ab and ACM_solve>=100)\par
+        return 1;\par
+        else return 2;\par
+\par
+    \}\par
+    float accessGPA()\par
+    \{\par
+        return GPA;\par
+    \}\par
+    void show_student_info()\par
+    \{\par
+        cout << setw(10) << acces_person() << setw(13) <<  GPA << endl << endl;\par
+    \}\par
+\};\par
+\par
+class Teacher : public Person\par
+\{\par
+    protected:\par
+    string designation,Username,Password;\par
+public :\par
+    Teacher() \{ \}\par
+    Teacher (string name,string designation,string Username, string Password):Person(name)\par
+    \{\par
+\par
+        this->designation=designation;\par
+        this->Username=Username;\par
+        this->Password=Password;\par
+    \}\par
+    string access_username()\{ return Username;\}\par
+    string access_password()\{ return Password;\}\par
+    void show_teacher_info()\par
+    \{\par
+            cout << endl\par
+            <<"This List has been Prepared by" << endl\par
+            << acces_person() << endl << designation << endl;\par
+    \}\par
+    int Match_info(string Username,string Password)\par
+    \{\par
+        if(this->Username==Username and this->Password==Password)\par
+            return 1;\par
+        else return 2;\par
+    \}\par
+    void Bubblesort()\par
+\{\par
+int i,j;\par
+float temp;\par
+for(i=0;i<8-1;i++)\par
+        for(j=0;j<8-i-1;j++)\par
+    \{\par
+        if(arr[j]>arr[j+1])\par
+        \{\par
+            temp=arr[j+1];\par
+            arr[j+1]=arr[j];\par
+            arr[j] = temp ;\par
+        \}\par
+    \}\par
+\}\par
+\};\par
+\par
+class Department\par
+\{\par
+   protected:\par
+       string Department_name;\par
+       string saved_username[3],saved_password[3];\par
+   public:\par
+       Department() \{ Department_name="Department of Computer Science and Engineering"; \}\par
+       void Save_username_password(string j,string k,int l)\par
+       \{\par
+           saved_username[l]=j;\par
+           saved_password[l]=k;\par
+       \}\par
+    int  Access_Request1(string Username)\par
+    \{\par
+        for(i=0;i<3;i++)\par
+        \{\par
+            if(saved_username[i]==Username)\par
+            \{\par
+                cnt=1;\par
+                return i;\par
+            \}\par
+        \}\par
+    \}\par
+    int Access_Request2(string Password,int Index)\par
+    \{\par
+        if(Password==saved_password[Index])\par
+            return 1;\par
+    \}\par
+    void show_dept_name()\par
+    \{\par
+        cout << Department_name << endl << endl;\par
+    \}\par
+\};\par
+\par
+class Date\par
+\{\par
+    public :\par
+    string  Month[14];\par
+    void Month_initializer()\par
+    \{\par
+        Month[0]=" ",Month[1]="January",Month[2]="February",Month[3]="March",Month[4]="April",Month[5]="May",Month[6]="June",Month[7]="July",Month[8]="August",Month[9]="September",Month[10]="October",Month[11]="November",Month[12]="December";\par
+    \}\par
+    int year,month,date,x;\par
+    void Incertpresenttime(tm *ltm)\par
+    \{\par
+        year=ltm->tm_year + 1900 ;\par
+        month=ltm->tm_mon + 1;\par
+        date=ltm->tm_mday ;\par
+\par
+    \}\par
+    void display()\par
+    \{\par
+        cout << "Date of publication " << endl;\par
+        cout << date << "th  " << Month[month] << "  ," << year << endl;\par
+    \}\par
+\};\par
+\par
+int main()\par
+\{\par
+    int n,a,b,j,Index=-1;\par
+    Student *performance[9]=\{\par
+    new Student("Akib islam",3.07 , 200  ),\par
+    new Student("Sweet",3.31,101),\par
+    new Student("Manajir Hasan",3.12,45),\par
+    new Student("Rakibul islam",3.36,34),\par
+    new Student("Forhad",3.01,199),\par
+    new Student("Ashik",3.76,300),\par
+    new Student("Polas",3.26,267),\par
+    new Student("Tanvir",3.16,198)\par
+     \};\par
+\par
+\par
+    Department CSE;\par
+    Teacher *assigned_teacher[3]=\{\par
+         new Teacher("Kamal Hossain Chowdhury", "Chairman","Kamal_Hossain","kamal1234" ),\par
+         new Teacher("Mahmudul Hasan Raju", "Assistant professor", "Mahmudul_Hasan","raju4321"),\par
+         new Teacher("Faisal Bin Abdul Aziz", "Assistant professor","Faisal_Aziz","faisal1234")\par
+     \};\par
+\par
+     string temp_username,temp_password;\par
+    for(i=0;i<3;i++)\par
+    \{\par
+        temp_username=assigned_teacher[i]->access_username();\par
+        temp_password=assigned_teacher[i]->access_password();\par
+        CSE.Save_username_password(temp_username,temp_password,i);\par
+    \}\par
+\par
+\par
+    string Username,Password;\par
+\par
+    cout << "Enter the Username" << endl;\par
+    cin >> Username;\par
+    Index=CSE.Access_Request1(Username);\par
+    while(cnt!=1)\par
+    \{\par
+    cout << "Invalid Username. Enter again" << endl;\par
+    cin >> Username;\par
+    Index=CSE.Access_Request1(Username);\par
+    \}\par
+\par
+    cnt=0;\par
+\par
+    cout << "Enter the Password" << endl;\par
+    cin >> Password;\par
+    cnt=CSE.Access_Request2(Password,Index);\par
+    while(cnt!=1)\par
+    \{\par
+    cout << "wrong password. Enter again" << endl;\par
+    cin >> Password;\par
+    cnt=CSE.Access_Request2(Password,Index);\par
+    \}\par
+\par
+\par
+\par
+    float temp;\par
+    int counter=0;\par
+    float maximum;\par
+    for(i=0;i<8;i++)\par
+    \{\par
+        arr[i]=performance[i]->accessGPA();\par
+    \}\par
+\par
+\par
+    assigned_teacher[Index]->Bubblesort();\par
+\par
+\par
+  cout << " TOP 5 students on the honor Board are" << endl << endl;\par
+  cout << setw(10) << "Student Name "  << setw(10) << "GPA" << endl  ;\par
+  cout << setw(10) << "_____________"  << setw(10) << "____" << endl << endl ;\par
+     for(i=7;i>=0;i--)\par
+     \{\par
+         maximum=arr[i];\par
+         for(j=0;j<8;j++)\par
+         \{\par
+             if(performance[j]->checkgpa(maximum)==1)\par
+             \{\par
+                 counter++;\par
+                 performance[j]->show_student_info();\par
+             \}\par
+             if(counter==5) break;\par
+     \}\par
+    \}\par
+\par
+\par
+assigned_teacher[Index]->show_teacher_info();\par
+CSE.show_dept_name();\par
+\par
+\par
+time_t now = time(0);\par
+tm *ltm = localtime(&now);\par
+Date A;\par
+A.Incertpresenttime(ltm);\par
+A.Month_initializer();\par
+A.display();\par
+\par
+\par
+return 0;\par
+\}\par
+\par
+SAMPLE OUTPUT:\par
+ Enter the Username\par
+Mahmudul_Hasan\par
+Enter the Password\par
+raju4321\par
+ TOP 5 students on the honor Board are\par
+\par
+Student Name        GPA\par
+_____________      ____\par
+\par
+     Ashik         3.76\par
+\par
+     Sweet         3.31\par
+\par
+     Polas         3.26\par
+\par
+    Tanvir         3.16\par
+\par
+Akib islam         3.07\par
+\par
+\par
+This List has been Prepared by\par
+Mahmudul Hasan Raju\par
+Assistant professor\par
+Department of Computer Science and Engineering\par
+\par
+Date of publication\par
+21th  October  ,2018\par
+\par
+Process returned 0 (0x0)   execution time : 22.175 s\par
+Press any key to continue.\par
+\par
+\par
+SAMPLE INPUT:\par
+#include<bits/stdc++.h>\par
+\par
+using namespace std;\par
+\par
+class Date\par
+\{\par
+public:\par
+    int day,month,year;\par
+    Date() \{\};\par
+    Date(int d,int m,int y)\par
+    \{\par
+        day=d;\par
+        month=m;\par
+        year=y;\par
+    \}\par
+\par
+\};\par
+\par
+class Person                 ///Person class\par
+\{\par
+public:\par
+    string name;\par
+    Date date;\par
+    Person() \{\}; ///Constructor-1 /Default Constructor\par
+    Person(string name)\par
+    \{\par
+        this->name=name;\par
+    \}\par
+    Person(string n,Date date)\par
+    \{\par
+        name=n;\par
+        this->date=date;\par
+    \}\par
+\};\par
+\par
+    class Department\par
+    \{\par
+    public:\par
+        string dept_name;\par
+        Department() \{\};\par
+        Department(string n)\par
+        \{\par
+            dept_name=n;\par
+        \}\par
+    \};\par
+\par
+    class Student : public Person             /// Student class\par
+    \{\par
+    public:\par
+        int id,ACM,prob_solve;\par
+        Department department;\par
+        Student() \{\};                                ///Constructor-1 /Default Constructor\par
+        Student(string name,Date *date,Department *department,int dd,int acm,int solve) : Person(name,*date)  ///constructor-2\par
+        \{\par
+            id=dd;\par
+            this->department=*department;\par
+            ACM=acm;\par
+            prob_solve=solve;\par
+        \}\par
+        View_Student_Info()                        ///function for viewing student info\par
+        \{\par
+            cout<<"Student name: "<<name<<endl;\par
+            cout<<"Department: "<<department.dept_name<<endl;\par
+            cout<<"Students Birthday: "<<this->date.day<<"-"<<this->date.month<<"-"<<this->date.year<<endl;\par
+        \}\par
+    \};\par
+\par
+    class Faculty : public Person                               ///faculty class\par
+    \{\par
+    public:\par
+        Student student;\par
+        string designation;\par
+        Date date;\par
+        Department department;\par
+        Faculty() \{\};                                                 ///Constructor-1 /Default Constructor\par
+        Faculty(string name,string designation,Date *date,Department *department):Person(name,*date)          ///constructor-2\par
+        \{\par
+            this->designation=designation;\par
+            this->department=*department;\par
+        \}\par
+        View_Faculty()                                                ///faculty viewing function\par
+        \{\par
+            cout<<"Name: "<<name<<endl;\par
+            cout<<"Department: "<<department.dept_name<<endl;\par
+            cout<<"Designation: "<<designation<<endl;\par
+        \}\par
+        int select_coach(Student *student)\par
+        \{\par
+            if(student->ACM>=3&&student->prob_solve>300)\par
+                return 1;\par
+            else\par
+                return 0;\par
+        \}\par
+    \};\par
+\par
+    int main()\par
+    \{\par
+        Department *department[5]=                      ///department type object declaration\par
+        \{\par
+            new Department("CSE"),\par
+            new Department("CSE"),\par
+            new Department("CSE"),\par
+            new Department("CSE"),\par
+            new Department("CSE"),\par
+        \};\par
+\par
+        Date *date[6]=                             ///date type object declaration\par
+        \{\par
+            new Date(23,04,1997),\par
+            new Date(13,05,1998),\par
+            new Date(01,03,1996),\par
+            new Date(12,05,1997),\par
+            new Date(19,04,1980),\par
+            new Date(22,07,1981)\par
+        \};\par
+        Student *student[3]=                               ///Student type object declaration\par
+        \{\par
+            new Student("Sejan",date[0],department[0],1001,4,301),\par
+            new Student("Polash",date[1],department[1],1002,4,400),\par
+            new Student("Shanto",date[2],department[2],1003,2,200)\par
+        \};\par
+        Faculty *faculty[2]=                                ///faculty object declaration.\par
+        \{\par
+            new Faculty("Kamal Hossain Chowdhury","Assistant Professor",date[3],department[3]),\par
+            new Faculty("Mahmudul Hasan","Assistant Professor",date[4],department[4])\par
+        \};\par
+        cout<<"THE DETAILS OF FACULTY MEMBER: "<<endl<<endl;\par
+        for(int i=0; i<2; i++)\{\par
+            faculty[i]->View_Faculty();\par
+            cout<<endl;\par
+        \}\par
+        cout<<endl<<endl;\par
+        cout<<"THE DETAILS OF STUDENTS: "<<endl<<endl;\par
+        for(int i=0; i<3; i++)\{\par
+            student[i]->View_Student_Info();\par
+            cout<<endl;\par
+        \}\par
+        int x;\par
+        cout<<endl<<endl;\par
+        for(int i=0;i<3;i++)\par
+        \{\par
+           x=faculty[i]->select_coach(student[i]);\par
+           if(x==1)\par
+           \{\par
+               cout<<"SELECTED AS COACH:"<<endl;\par
+               cout<<"THE DETAILS OF THE STUDENT IS: "<<endl;\par
+               student[i]->View_Student_Info();\par
+               cout<<endl<<endl;\par
+           \}\par
+           else\par
+           \{\par
+               cout<<"NOT SELECTED AS COACH:"<<endl;\par
+               cout<<"THE DETAILS OF THE STUDENT IS: "<<endl;\par
+               student[i]->View_Student_Info();\par
+               cout<<endl<<endl;\par
+           \}\par
+        \}\par
+        return 0;\par
+    \}\par
+\par
+SAMPLE OUTPUT:\par
+THE DETAILS OF FACULTY MEMBER:\par
+\par
+Name: Kamal Hossain Chowdhury\par
+Department: CSE\par
+Designation: Assistant Professor\par
+\par
+Name: Mahmudul Hasan\par
+Department: CSE\par
+Designation: Assistant Professor\par
+\par
+\par
+\par
+THE DETAILS OF STUDENTS:\par
+\par
+Student name: Sejan\par
+Department: CSE\par
+Students Birthday: 23-4-1997\par
+\par
+Student name: Polash\par
+Department: CSE\par
+Students Birthday: 13-5-1998\par
+\par
+Student name: Shanto\par
+Department: CSE\par
+Students Birthday: 1-3-1996\par
+\par
+\par
+\par
+SELECTED AS COACH:\par
+THE DETAILS OF THE STUDENT IS:\par
+Student name: Sejan\par
+Department: CSE\par
+Students Birthday: 23-4-1997\par
+\par
+\par
+SELECTED AS COACH:\par
+THE DETAILS OF THE STUDENT IS:\par
+Student name: Polash\par
+Department: CSE\par
+Students Birthday: 13-5-1998\par
+\par
+\par
+NOT SELECTED AS COACH:\par
+THE DETAILS OF THE STUDENT IS:\par
+Student name: Shanto\par
+Department: CSE\par
+Students Birthday: 1-3-1996\par
+\par
+\par
+\par
+Process returned 0 (0x0)   execution time : 0.306 s\par
+Press any key to continue.\par
+}
+ 
